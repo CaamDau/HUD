@@ -9,7 +9,7 @@
 
 import UIKit
 
-class CD_HUDContentView: UIView {
+class HUDContentView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -22,22 +22,22 @@ class CD_HUDContentView: UIView {
         self.backgroundColor = UIColor.cd_hex("0", dark: "f").cd_alpha(0.8)
     }
     
-    lazy var view_text: CD_HUDTextView = {
-        return CD_HUDTextView().cd.build
+    lazy var view_text: HUDTextView = {
+        return HUDTextView().cd.build
     }()
     
-    lazy var view_icon: CD_HUDActivityView = {
-        return CD_HUDActivityView().cd.build
+    lazy var view_icon: HUDActivityView = {
+        return HUDActivityView().cd.build
     }()
     
     var title:String = ""
     var detail:String = ""
-    var model:CD_HUD.Model = CD_HUD.modelDefault
+    var model:HUD.Model = HUD.modelDefault
 }
 
-extension CD_HUDContentView {
+extension HUDContentView {
     
-    func show(_ style:CD_HUD.Style, title:String, detail:String, model:CD_HUD.Model) {
+    func show(_ style:HUD.Style, title:String, detail:String, model:HUD.Model) {
         
         self.title = title
         self.detail = detail

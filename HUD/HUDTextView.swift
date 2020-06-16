@@ -9,7 +9,7 @@
 
 import UIKit
 
-class CD_HUDTextView: UIStackView {
+class HUDTextView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeDefault()
@@ -36,14 +36,14 @@ class CD_HUDTextView: UIStackView {
     }()
     var title:String = ""
     var detail:String = ""
-    var model:CD_HUD.Model = CD_HUD.modelDefault
+    var model:HUD.Model = HUD.modelDefault
 }
 
-extension CD_HUDTextView {
+extension HUDTextView {
     func makeDefault() {
         self.cd.axis(.vertical)
     }
-    func show(title:String = "", detail:String = "", model:CD_HUD.Model = CD_HUD.modelDefault){
+    func show(title:String = "", detail:String = "", model:HUD.Model = HUD.modelDefault){
         self.title = title
         self.detail = detail
         self.model = model

@@ -10,7 +10,7 @@
 [![](https://img.shields.io/badge/Swift-4.0~5.0-orange.svg?style=flat)](https://cocoapods.org/pods/CaamDauHUD)
 
 
-# CD_HUD 提示窗
+# HUD 提示窗
 
 ## Installation
 
@@ -46,11 +46,11 @@ pod 'CaamDau/HUD'
 ## Usage
 ```ruby
 
-hud = CD_HUD().show(with:view, style:style, title: title, detail: detail, model: model)
+hud = HUD().show(with:view, style:style, title: title, detail: detail, model: model)
 hud.remove()
 
-CD_HUD.show(with:view, style:style, title: title, detail: detail, model: model)
-CD_HUD.remove(for:view)
+HUD.show(with:view, style:style, title: title, detail: detail, model: model)
+HUD.remove(for:view)
 ```
 
 ```ruby

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CD_HUDActivityView: UIStackView {
+class HUDActivityView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeDefault()
@@ -38,20 +38,20 @@ class CD_HUDActivityView: UIStackView {
         return UIView().cd.build
     }()
     
-    lazy var view_proress: CD_HUDProgressView = {
-        return CD_HUDProgressView().cd.build
+    lazy var view_proress: HUDProgressView = {
+        return HUDProgressView().cd.build
     }()
 
     var title:String = ""
     var detail:String = ""
-    var model:CD_HUD.Model = CD_HUD.modelDefault
+    var model:HUD.Model = HUD.modelDefault
 }
 //MARK:--- Activity ----------
-extension CD_HUDActivityView {
+extension HUDActivityView {
     func makeDefault() {
         self.cd.axis(.vertical)
     }
-    func show(_ style:CD_HUD.Style = .loading(nil), model:CD_HUD.Model) {
+    func show(_ style:HUD.Style = .loading(nil), model:HUD.Model) {
         self.model = model
         switch style {
         case .loading(let l):
@@ -60,26 +60,26 @@ extension CD_HUDActivityView {
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tinfo(iconFontSize).text)
-                .text(CD_IconFont.tinfo(iconFontSize).font)
+                .text(IconFont.tinfo(iconFontSize).text)
+                .text(IconFont.tinfo(iconFontSize).font)
         case .succeed:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tcheck(iconFontSize).text)
-                .text(CD_IconFont.tcheck(iconFontSize).font)
+                .text(IconFont.tcheck(iconFontSize).text)
+                .text(IconFont.tcheck(iconFontSize).font)
         case .warning:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.twarn(iconFontSize).text)
-                .text(CD_IconFont.twarn(iconFontSize).font)
+                .text(IconFont.twarn(iconFontSize).text)
+                .text(IconFont.twarn(iconFontSize).font)
         case .error:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tclose(iconFontSize).text)
-                .text(CD_IconFont.tclose(iconFontSize).font)
+                .text(IconFont.tclose(iconFontSize).text)
+                .text(IconFont.tclose(iconFontSize).font)
         case .text:
             break
         case .progress(let pro):
@@ -103,7 +103,7 @@ extension CD_HUDActivityView {
         return model._axis == .vertical ? 40 : model._fontTitle.pointSize*1.6
     }
     
-    func loading(_ style:CD_HUD.Style.Loading?)  {
+    func loading(_ style:HUD.Style.Loading?)  {
         let style = style ?? .activity
         switch style {
         case .activity:
@@ -122,36 +122,36 @@ extension CD_HUDActivityView {
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tloading(iconFontSize).text)
-                .text(CD_IconFont.tloading(iconFontSize).font)
+                .text(IconFont.tloading(iconFontSize).text)
+                .text(IconFont.tloading(iconFontSize).font)
             makeRotationAnimotion(label)
         case .diamond:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tload_diamond(iconFontSize).text)
-                .text(CD_IconFont.tload_diamond(iconFontSize).font)
+                .text(IconFont.tload_diamond(iconFontSize).text)
+                .text(IconFont.tload_diamond(iconFontSize).font)
             makeRotationAnimotion(label)
         case .brush:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tload_brush(iconFontSize).text)
-                .text(CD_IconFont.tload_brush(iconFontSize).font)
+                .text(IconFont.tload_brush(iconFontSize).text)
+                .text(IconFont.tload_brush(iconFontSize).font)
             makeRotationAnimotion(label)
         case .roundEyes:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.tload_eyes(iconFontSize).text)
-                .text(CD_IconFont.tload_eyes(iconFontSize).font)
+                .text(IconFont.tload_eyes(iconFontSize).text)
+                .text(IconFont.tload_eyes(iconFontSize).font)
             makeRotationAnimotion(label)
         case .arrow:
             self.cd.addArranged(subview: label)
             label.cd
                 .text(model._colorActivity)
-                .text(CD_IconFont.trefresh(iconFontSize).text)
-                .text(CD_IconFont.trefresh(iconFontSize).font)
+                .text(IconFont.trefresh(iconFontSize).text)
+                .text(IconFont.trefresh(iconFontSize).font)
             makeRotationAnimotion(label)
         case .view(let vv):
             self.cd.addArranged(subview: vv)
@@ -161,7 +161,7 @@ extension CD_HUDActivityView {
 }
 
 
-extension CD_HUDActivityView {
+extension HUDActivityView {
     func makeRotationAnimotion(_ view:UIView) {
         let animote = CABasicAnimation(keyPath: "transform.rotation.z")
         animote.duration = 1.5

@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-extension CD_HUD: CAAnimationDelegate {
+extension HUD: CAAnimationDelegate {
     public func animationDidStart(_ anim: CAAnimation) {
         
     }
@@ -19,7 +19,7 @@ extension CD_HUD: CAAnimationDelegate {
     }
 }
 
-extension CD_HUD {
+extension HUD {
     func makeLayoutAnimation(_ remove:Bool = false) {
         switch (remove ? model._hiddenAnimat : model._showAnimation) {
         case .none where remove:

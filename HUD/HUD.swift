@@ -10,7 +10,7 @@
 import UIKit
 
 
-public class CD_HUD: UIView {
+public class HUD: UIView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -23,15 +23,15 @@ public class CD_HUD: UIView {
     
     var contentView:UIView?
     
-    open var style:CD_HUD.Style = .text,
+    open var style:HUD.Style = .text,
     title:String = "",
     detail:String = "",
-    model:CD_HUD.Model = CD_HUD.modelDefault
+    model:HUD.Model = HUD.modelDefault
 }
 
-extension CD_HUD {
+extension HUD {
     @discardableResult
-    public func show(with supView:UIView? = CD.window, style:CD_HUD.Style = .text, title:String = "", detail:String = "", model:CD_HUD.Model = CD_HUD.modelDefault) -> CD_HUD {
+    public func show(with supView:UIView? = CD.window, style:HUD.Style = .text, title:String = "", detail:String = "", model:HUD.Model = HUD.modelDefault) -> HUD {
         self.style = style
         self.title = title
         self.detail = detail
@@ -39,7 +39,7 @@ extension CD_HUD {
         return self.show(with: supView)
     }
     @discardableResult
-    public func show(with supView:UIView? = CD.window) -> CD_HUD {
+    public func show(with supView:UIView? = CD.window) -> HUD {
         guard let view = supView else { return self }
         view.cd.add(self)
         makeUI()
@@ -50,7 +50,7 @@ extension CD_HUD {
         self.cd.background(model._colorMask)
         switch style {
         case .text, .loading, .info, .succeed, .warning, .error, .progress:
-            let vv = CD_HUDContentView().cd
+            let vv = HUDContentView().cd
                 .corner(model._radius, clips: true)
                 .background(model._colorBg)
                 .build
@@ -67,7 +67,7 @@ extension CD_HUD {
     }
     
     @discardableResult
-    public func remove(_ duration:TimeInterval = -1) -> CD_HUD {
+    public func remove(_ duration:TimeInterval = -1) -> HUD {
         guard duration != 0 else {
             self.removeAnimation()
             return self
@@ -82,7 +82,7 @@ extension CD_HUD {
                     : count)
             duration = time
         }
-        CD_Timer.after(duration) {[weak self] in
+        Time.after(duration) {[weak self] in
             self?.removeAnimation()
         }
         return self
@@ -94,7 +94,7 @@ extension CD_HUD {
 }
 
 
-extension CD_HUD {
+extension HUD {
     public enum Style {
         case text
         case loading(_ l:Loading?)
@@ -126,14 +126,14 @@ extension CD_HUD {
         
         public enum Progress {
             /// 默认
-            case `default`(model:CD_HUDProgressView.Model, handler:((CD_HUDProgressView?)->Void)?)
+            case `default`(model:HUDProgressView.Model, handler:((HUDProgressView?)->Void)?)
             /// 自定义 View
             case view(_ view:UIView)
         }
     }
 }
 
-extension CD_HUD {
+extension HUD {
     public enum Axis {
         case vertical
         case horizontal
@@ -154,13 +154,13 @@ extension CD_HUD {
         /// 弹簧动画 只适用 HUD显示 & Position .top .bottom .custom(_ point:CGPoint)
         case spring
         /// 自定义动画
-        case custom(_ animat:((_ hud:CD_HUD?, _ contentView:UIView?)->Void)?)
+        case custom(_ animat:((_ hud:HUD?, _ contentView:UIView?)->Void)?)
         case none
     }
 }
 
-extension CD_HUD {
-    public static var modelDefault:Model = CD_HUD.Model()
+extension HUD {
+    public static var modelDefault:Model = HUD.Model()
     public struct Model {
         public init() {}
         /// HUD 蒙板 边距
@@ -179,13 +179,13 @@ extension CD_HUD {
         public var _offsetBottomY:CGFloat = CD.sysTabBarH
         
         /// contentView 布局样式
-        public var _position:CD_HUD.Position = .center
+        public var _position:HUD.Position = .center
         /// contentView 显示方式
-        public var _showAnimation:CD_HUD.Animation = .zoom
+        public var _showAnimation:HUD.Animation = .zoom
         /// contentView 消失方式
-        public var _hiddenAnimat:CD_HUD.Animation = .zoom
+        public var _hiddenAnimat:HUD.Animation = .zoom
         /// contentView 布局样式
-        public var _axis:CD_HUD.Axis = .vertical
+        public var _axis:HUD.Axis = .vertical
         /// contentView 背景色
         public var _colorBg:UIColor = UIColor.cd_hex("0", dark: "f").cd_alpha(0.9)
         /// contentView radius
@@ -228,12 +228,12 @@ extension CD_HUD {
 
 public extension CaamDau where Base: UIView {
     @discardableResult
-    func hud(_ style:CD_HUD.Style = .text,
+    func hud(_ style:HUD.Style = .text,
              title:String = "",
              detail:String = "",
-             model:CD_HUD.Model = CD_HUD.modelDefault,
+             model:HUD.Model = HUD.modelDefault,
              duration:TimeInterval = -1) -> CaamDau {
-        let v = CD_HUD()
+        let v = HUD()
         v.show(with:base, style:style, title: title, detail: detail, model: model)
         switch style {
         case .text, .info, .succeed, .warning, .error:
@@ -246,7 +246,7 @@ public extension CaamDau where Base: UIView {
     @discardableResult
     func hud_remove(_ duration:TimeInterval = 0, animation:Bool = true) -> CaamDau  {
         base.subviews.forEach { (v) in
-            guard let vv = v as? CD_HUD else{return}
+            guard let vv = v as? HUD else{return}
             if !animation {
                 vv.model._hiddenAnimat = .none
             }
@@ -256,14 +256,14 @@ public extension CaamDau where Base: UIView {
     }
 }
 
-extension CD_HUD {
+extension HUD {
     public static func show(with view:UIView,
-                            style:CD_HUD.Style = .text,
+                            style:HUD.Style = .text,
                             title:String = "",
                             detail:String = "",
-                            model:CD_HUD.Model = CD_HUD.modelDefault,
+                            model:HUD.Model = HUD.modelDefault,
                             duration:TimeInterval = -1) {
-        let v = CD_HUD()
+        let v = HUD()
         v.show(with:view, style:style, title: title, detail: detail, model: model)
         switch style {
         case .text, .info, .succeed, .warning, .error:
@@ -275,7 +275,7 @@ extension CD_HUD {
     
     public static func remove(for view:UIView, duration:TimeInterval = 0, animation:Bool = true) {
         view.subviews.forEach { (v) in
-            guard let vv = v as? CD_HUD else{return}
+            guard let vv = v as? HUD else{return}
             if !animation {
                 vv.model._hiddenAnimat = .none
             }

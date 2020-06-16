@@ -10,7 +10,7 @@
 import Foundation
 import SnapKit
 
-extension CD_HUD {
+extension HUD {
     func makeHUDLayoutPositionTop() {
         guard let _ = self.superview else { return }
         if model._isEnabledMask {
@@ -157,7 +157,7 @@ extension CD_HUD {
 }
 
 
-extension CD_HUDContentView {
+extension HUDContentView {
     func makeTextLayout(_ alone:Bool)  {
         if alone {
             view_text.snp.makeConstraints { (make) in

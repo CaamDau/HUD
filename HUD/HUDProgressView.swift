@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class CD_HUDProgressView: UIView {
+public class HUDProgressView: UIView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         makeDefault()
@@ -53,7 +53,7 @@ public class CD_HUDProgressView: UIView {
             .build
     }()
     
-    open var model:CD_HUDProgressView.Model = CD_HUDProgressView.Model() {
+    open var model:HUDProgressView.Model = HUDProgressView.Model() {
         didSet{
             trackLayer.strokeColor = model.colorTrack.cgColor
             trackLayer.lineWidth = model.lineWidth
@@ -65,9 +65,9 @@ public class CD_HUDProgressView: UIView {
             self.setNeedsDisplay()
         }
     }
-    open var handler:((CD_HUDProgressView?) -> Void)? = nil {
+    open var handler:((HUDProgressView?) -> Void)? = nil {
         didSet{
-            weak var vv:CD_HUDProgressView? = self
+            weak var vv:HUDProgressView? = self
             handler?(vv)
         }
     }
@@ -100,7 +100,7 @@ public class CD_HUDProgressView: UIView {
     
     
 }
-extension CD_HUDProgressView {
+extension HUDProgressView {
     private func makeDefault() {
         self.layer.addSublayer(trackLayer)
         self.layer.addSublayer(progressLayer)
@@ -121,7 +121,7 @@ extension CD_HUDProgressView {
     }
 }
 
-extension CD_HUDProgressView {
+extension HUDProgressView {
     public struct Model {
         ///进度条宽度
         public var lineWidth: CGFloat = 5
